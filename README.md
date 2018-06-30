@@ -1,4 +1,8 @@
-### a quite simple router implemented with ES6 syntax 
+### a quite simple router implemented with ES6 syntax and express style🚀 
+
+first,import this module:  
+
+``const Router = require('hash-router')``  
 
 you can initialize a router using a entrance node
 
@@ -17,11 +21,11 @@ then,set a homepage goes like:
 use a substring to create serial routes ,if the hash string include the substring you set,then callback execute   
 if you set the same hash for ``router.route()`` and ``router.match()`` ,the callback for ``router.route()`` will not execute
 
-      router.route('show',function(){
+      router.route('show',() => {
             router.render('this is show')
             //you will nerver see this...
          })
          
-      router.match('show',function(){
+      router.match('show',() => {
          router.render('this is show also')
       })

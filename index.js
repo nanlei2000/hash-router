@@ -54,3 +54,5 @@ class Router {
       history.go(-1)
    }
 }
+
+module.exports = Router
