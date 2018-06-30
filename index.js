@@ -25,9 +25,7 @@ class Router {
    }
    _run() {
       let hash = location.hash.substr(1)
-      if (this.routes.get(hash) === undefined) {
-         this.render('')
-      } else {
+      if (this.routes.get(hash) != undefined) {
          this.routes.get(hash)()
       }
    }
