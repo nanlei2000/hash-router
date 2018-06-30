@@ -9,6 +9,7 @@ then,set a homepage goes like:
       router.route('', () => {
             router.go('home')
          })
+
       router.route('home', () => {
          router.render('this is home')
       })
@@ -20,6 +21,7 @@ if you set the same hash for ``router.route()`` and ``router.match()`` ,the call
             router.render('this is show')
             //you will nerver see this...
          })
+         
       router.match('show',function(){
          router.render('this is show also')
       })
