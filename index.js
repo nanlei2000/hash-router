@@ -38,8 +38,6 @@ class Router {
             if (hash.indexOf(key) !== -1) {
                this.subStrMap.get(key)()
                break
-            } else {
-               this.render('')
             }
          }
       }
