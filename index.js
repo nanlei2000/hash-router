@@ -4,12 +4,17 @@
 
 class Router {
    constructor(entrance) {
+      this._init(entrance)
+   }
+   _init(entrance){
       this.entrance = document.querySelector(entrance)
       this.routes = new Map()
       this.subStrMap = new Map()
       let noop = () => {}
       this.routes.set('', noop)
       this._active()
+      this.query = ''
+      this.path = ''
    }
    route(hash, fn) {
       this.routes.set(hash, fn)
@@ -26,14 +31,19 @@ class Router {
    _run() {
       let hash = location.hash.substr(1)
       if (this.routes.get(hash) != undefined) {
+         this.query = ''
+         this.path = hash
          this.routes.get(hash)()
       }
    }
-   _runMatch() {
+   _runMatch() {  
       let hash = location.hash.substr(1)
-      if (this.subStrMap.size !== 0) {
+      if (this.subStrMap.size !== 0 && hash.indexOf('?') !== -1 && !this.routes.has(hash)) {
          for (let key of this.subStrMap.keys()) {
             if (hash.indexOf(key) !== -1) {
+               let obj = this._handleHash(hash)
+               this.query = obj.query
+               this.path = obj.path
                this.subStrMap.get(key)()
                break
             }
@@ -49,6 +59,14 @@ class Router {
    back() {
       history.go(-1)
    }
+   _handleHash(hash){
+      let ind = hash.indexOf('?')
+      let obj = {}
+      obj.path = hash.substring(0,ind)
+      obj.query = hash.substr(ind + 1)
+      return obj
+   }
+   
 }
 
-module.exports = Router
+// export default Router
